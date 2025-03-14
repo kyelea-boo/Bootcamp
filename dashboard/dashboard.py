@@ -5,12 +5,14 @@ import streamlit as st
 sns.set(style='dark')
 st.set_page_config(page_title="Analisis E-Commerce Public Dataset", layout="wide")
 
+@st.cache
+def load_data():
+    df_orders = pd.read_csv("data/ordered_products_df.csv")
+    df_reviews = pd.read_csv("data/reviews_df.csv")
+    return df_orders, df_reviews
 
-df_orders = pd.read_csv("data/gordered_products_df.csv")
-df_reviews = pd.read_csv("dashboard/gordered_products_df.csv")
+df_orders, df_reviews = load_data()
 
-
-# df_orders, df_reviews = load_data()
 
 st.sidebar.markdown("## Navigasi")
 if st.sidebar.button("Halaman Utama"):
