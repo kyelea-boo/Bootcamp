@@ -21,8 +21,8 @@ if menu == "Halaman Utama":
         <h3 style='text-align: center;'>Berikut adalah dataset yang digunakan pada Analisis Data kali ini</h3>
         """, unsafe_allow_html=True)
     
-    dataset_options = {"Category Reviews": "pyth\category_reviews.csv", 
-                       "Ordered Products": "pyth\ordered_products_by_customers.csv",
+    dataset_options = {"Category Reviews": "category_reviews.csv", 
+                       "Ordered Products": "ordered_products_by_customers.csv",
                        }
     selected_dataset = st.selectbox("Pilih Dataset:", list(dataset_options.keys()))
     file_path = dataset_options[selected_dataset]
