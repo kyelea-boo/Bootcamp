@@ -2,10 +2,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-# from babel.numbers import format_currency
-
 sns.set(style='dark')
 st.set_page_config(page_title="Analisis E-Commerce Public Dataset", layout="wide")
+
+
+df_orders = pd.read_csv("data/gordered_products_df.csv")
+df_reviews = pd.read_csv("dashboard/gordered_products_df.csv")
+
+
+# df_orders, df_reviews = load_data()
 
 st.sidebar.markdown("## Navigasi")
 if st.sidebar.button("Halaman Utama"):
@@ -21,8 +26,8 @@ if menu == "Halaman Utama":
         <h3 style='text-align: center;'>Berikut adalah dataset yang digunakan pada Analisis Data kali ini</h3>
         """, unsafe_allow_html=True)
     
-    dataset_options = {"Category Reviews": "category_reviews.csv", 
-                       "Ordered Products": "ordered_products_by_customers.csv",
+    dataset_options = {"Category Reviews": "df_orders", 
+                       "Ordered Products": "df_reviews",
                        }
     selected_dataset = st.selectbox("Pilih Dataset:", list(dataset_options.keys()))
     file_path = dataset_options[selected_dataset]
@@ -44,7 +49,7 @@ elif menu == "Analisis Data":
     st.write("### PERTANYAAN 1")
     st.write("###  Produk apa saja yang memiliki volume pembelian tertinggi?")
 
-    ordered_products_by_customers_df = pd.read_csv("pyth\ordered_products_by_customers.csv")
+    ordered_products_by_customers_df = df_orders
     # datetime_columns = ["order_purchase_timestamp", "order_approved_at", "order_delivered_carrier_date", "order_delivered_customer_date", "order_estimated_delivery_date"]
     ordered_products_by_customers_df.reset_index(inplace=True)
 
@@ -78,7 +83,7 @@ elif menu == "Analisis Data":
     # PERTANYAAN 2
     st.write("### PERTANYAAN 2")
     st.write("###  Apa kategori produk yang memiliki rating tertinggi dan rating terendah?  ")
-    category_reviews_df = pd.read_csv("pyth\category_reviews.csv")
+    category_reviews_df = df_reviews
 
     category_reviews_sorted = category_reviews_df.sort_values(by="review_score", ascending=False)
     top_10_products_by_review = category_reviews_sorted.head(10)
